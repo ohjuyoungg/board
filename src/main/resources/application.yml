@@ -1,1 +1,15 @@
-spring.application.name=Juyoung
+spring:
+  application.name: Juyoung
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:dev
+    username: sa
+    password:
