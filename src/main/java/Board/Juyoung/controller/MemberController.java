@@ -2,9 +2,13 @@ package Board.Juyoung.controller;
 
 import Board.Juyoung.controller.dto.request.MemberCreateRequest;
 import Board.Juyoung.controller.dto.request.MemberUpdateRequest;
+import Board.Juyoung.controller.dto.response.MemberResponse;
 import Board.Juyoung.service.MemberService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,20 +24,37 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    public String register(@RequestBody MemberCreateRequest memberCreateRequest) {
+    public ResponseEntity<Void> register(@RequestBody MemberCreateRequest memberCreateRequest) {
         memberService.register(memberCreateRequest);
-        return "ok";
+        return ResponseEntity
+            .ok()
+            .build();
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         memberService.delete(id);
-        return "ok";
+        return ResponseEntity
+            .noContent()
+            .build();
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable("id") Long id, @RequestBody MemberUpdateRequest memberUpdateRequest) {
+    public ResponseEntity<Void> update(@PathVariable("id") Long id,
+        @RequestBody MemberUpdateRequest memberUpdateRequest) {
         memberService.update(memberUpdateRequest, id);
-        return "ok";
+        return ResponseEntity
+            .noContent()
+            .build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MemberResponse> getMember(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(memberService.getMember(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MemberResponse>> getMembers() {
+        return ResponseEntity.ok(memberService.getMembers());
     }
 }
