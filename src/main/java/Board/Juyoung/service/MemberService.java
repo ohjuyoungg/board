@@ -16,12 +16,14 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public void register(MemberCreateRequest memberCreateRequest) {
         Member member = new Member(memberCreateRequest.email(), memberCreateRequest.password(),
             memberCreateRequest.nickname());
         memberRepository.save(member);
     }
 
+    @Transactional
     public void delete(Long id) {
         memberRepository.deleteById(id);
     }
