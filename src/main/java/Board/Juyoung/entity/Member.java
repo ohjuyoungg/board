@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 - PK
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 - PK
     private Long id;
     private String email;
     private String password;
@@ -23,5 +24,17 @@ public class Member {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+    }
+
+    public void changeNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void changeEmail(String email) {
+        this.email = email;
+    }
+
+    public void changePassword(String password) {
+        this.password = password;
     }
 }
