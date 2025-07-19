@@ -17,4 +17,8 @@ public class MemberService {
             memberCreateRequest.nickname());
         memberRepository.save(member);
     }
+
+    public void delete(Long id) {
+        memberRepository.deleteById(id);
+    }
 }
