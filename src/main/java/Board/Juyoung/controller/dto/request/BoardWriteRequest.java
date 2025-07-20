@@ -1,2 +1,5 @@
-package Board.Juyoung.controller.dto.request;public class BoardWriteRequest {
+package Board.Juyoung.controller.dto.request;
+
+public record BoardWriteRequest(String title, String content, String image) {
+
 }
