@@ -1,6 +1,7 @@
 package Board.Juyoung.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,16 +20,17 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String Content;
+    private String content;
     private String image;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Board(String title, String content, String image) {
+    public Board(String title, String content, String image, Member member) {
         this.title = title;
-        Content = content;
+        this.content = content;
         this.image = image;
+        this.member = member;
     }
 }
