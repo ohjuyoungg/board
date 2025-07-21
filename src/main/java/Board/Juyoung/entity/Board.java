@@ -33,4 +33,16 @@ public class Board {
         this.image = image;
         this.member = member;
     }
+
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    public void changeContent(String content) {
+        this.content = content;
+    }
+
+    public void changeImage(String image) {
+        this.image = image;
+    }
 }
