@@ -49,9 +49,9 @@ public class BoardController {
             .build();
     }
 
-    @GetMapping("/{memberId}")
-    public ResponseEntity<BoardResponse> getBoard(@PathVariable("memberId") Long memberId) {
-        return ResponseEntity.ok(boardService.getBoard(memberId));
+    @GetMapping("/{boardId}")
+    public ResponseEntity<BoardResponse> getBoard(@PathVariable("boardId") Long boardId) {
+        return ResponseEntity.ok(boardService.getBoard(boardId));
     }
 
     @GetMapping
