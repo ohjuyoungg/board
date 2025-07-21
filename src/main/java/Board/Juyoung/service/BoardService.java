@@ -43,8 +43,8 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public BoardResponse getBoard(Long memberId) {
-        Board board = boardRepository.findById(memberId)
+    public BoardResponse getBoard(Long boardId) {
+        Board board = boardRepository.findById(boardId)
             .orElseThrow(() -> new RuntimeException("존재하지 않는 게시판입니다."));
         return BoardResponse.of(board);
     }
