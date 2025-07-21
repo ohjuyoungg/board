@@ -32,9 +32,9 @@ public class BoardController {
             .build();
     }
 
-    @DeleteMapping("{memberId}")
-    public ResponseEntity<Void> delete(@PathVariable("memberId") Long memberId) {
-        boardService.delete(memberId);
+    @DeleteMapping("{memberId}/{boardId}")
+    public ResponseEntity<Void> delete(@PathVariable("memberId") Long memberId, @PathVariable("boardId") Long boardId) {
+        boardService.delete(memberId, boardId);
         return ResponseEntity
             .noContent()
             .build();
