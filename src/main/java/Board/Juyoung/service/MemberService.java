@@ -31,7 +31,7 @@ public class MemberService {
     @Transactional
     public void update(MemberUpdateRequest memberUpdateRequest, Long id) {
         Member member = memberRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 유저입니다."));
+            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
         member.changeEmail(memberUpdateRequest.email());
         member.changePassword(memberUpdateRequest.password());
         member.changeNickname(memberUpdateRequest.nickname());
@@ -40,7 +40,7 @@ public class MemberService {
     @Transactional(readOnly = true)
     public MemberResponse getMember(Long id) {
         Member member = memberRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 유저입니다."));
+            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
         return MemberResponse.of(member);
     }
 
