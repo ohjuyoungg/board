@@ -33,4 +33,9 @@ public class BoardService {
             .map(BoardResponse::of)
             .toList();
     }
+
+    @Transactional
+    public void delete(Long memberId) {
+        boardRepository.deleteById(memberId);
+    }
 }
