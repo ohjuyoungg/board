@@ -1,5 +1,6 @@
 package Board.Juyoung.service;
 
+import Board.Juyoung.controller.dto.request.BoardUpdateRequest;
 import Board.Juyoung.controller.dto.request.BoardWriteRequest;
 import Board.Juyoung.controller.dto.response.BoardResponse;
 import Board.Juyoung.entity.Board;
@@ -27,15 +28,31 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional
+    public void delete(Long memberId) {
+        boardRepository.deleteById(memberId);
+    }
+
+    @Transactional
+    public void update(BoardUpdateRequest boardUpdateRequest, Long memberId) {
+        Board board = boardRepository.findById(memberId)
+            .orElseThrow(() -> new RuntimeException("존재하지 않는 게시판입니다."));
+        board.changeContent(boardUpdateRequest.content());
+        board.changeTitle(boardUpdateRequest.title());
+        board.changeImage(boardUpdateRequest.image());
+    }
+
+    @Transactional(readOnly = true)
+    public BoardResponse getBoard(Long memberId) {
+        Board board = boardRepository.findById(memberId)
+            .orElseThrow(() -> new RuntimeException("존재하지 않는 게시판입니다."));
+        return BoardResponse.of(board);
+    }
+
     @Transactional(readOnly = true)
     public List<BoardResponse> getBoards() {
         return boardRepository.findAll().stream()
             .map(BoardResponse::of)
             .toList();
-    }
-
-    @Transactional
-    public void delete(Long memberId) {
-        boardRepository.deleteById(memberId);
     }
 }
