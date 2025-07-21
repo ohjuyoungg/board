@@ -40,10 +40,10 @@ public class BoardController {
             .build();
     }
 
-    @PutMapping("/{memberId}")
-    public ResponseEntity<Void> update(@PathVariable("memberId") Long memberId,
+    @PutMapping("/{memberId}/{boardId}")
+    public ResponseEntity<Void> update(@PathVariable("memberId") Long memberId, @PathVariable("boardId") Long boardId,
         @RequestBody BoardUpdateRequest boardUpdateRequest) {
-        boardService.update(boardUpdateRequest, memberId);
+        boardService.update(memberId, boardId, boardUpdateRequest);
         return ResponseEntity
             .noContent()
             .build();
