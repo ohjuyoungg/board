@@ -40,9 +40,13 @@ public class BoardService {
     }
 
     @Transactional
-    public void update(BoardUpdateRequest boardUpdateRequest, Long memberId) {
-        Board board = boardRepository.findById(memberId)
+    public void update(Long memberId, Long boardId, BoardUpdateRequest boardUpdateRequest) {
+        Board board = boardRepository.findById(boardId)
             .orElseThrow(() -> new RuntimeException("존재하지 않는 게시판입니다."));
+        Long boardMemberId = board.getMember().getId();
+        if (memberId != boardMemberId) {
+            throw new RuntimeException("해당 게시글을 수정할 수 있는 권한이 없습니다.");
+        }
         board.changeContent(boardUpdateRequest.content());
         board.changeTitle(boardUpdateRequest.title());
         board.changeImage(boardUpdateRequest.image());
