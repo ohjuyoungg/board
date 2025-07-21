@@ -22,7 +22,7 @@ public class BoardService {
     @Transactional
     public void write(Long memberId, BoardWriteRequest boardWriteRequest) {
         Member member = memberRepository.findById(memberId)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 유저입니다."));
+            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
         Board board = new Board(boardWriteRequest.title(), boardWriteRequest.content(), boardWriteRequest.image(),
             member);
         boardRepository.save(board);
@@ -31,10 +31,10 @@ public class BoardService {
     @Transactional
     public void delete(Long memberId, Long boardId) {
         Board board = boardRepository.findById(boardId)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 게시판입니다."));
+            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시판입니다."));
         Long boardMemberId = board.getMember().getId();
-        if (memberId != boardMemberId) {
-            throw new RuntimeException("해당 게시글을 삭제할 수 있는 권한이 없습니다.");
+        if (!memberId.equals(boardMemberId)) {
+            throw new IllegalArgumentException("해당 게시글을 삭제할 수 있는 권한이 없습니다.");
         }
         boardRepository.deleteById(boardId);
     }
@@ -42,10 +42,10 @@ public class BoardService {
     @Transactional
     public void update(Long memberId, Long boardId, BoardUpdateRequest boardUpdateRequest) {
         Board board = boardRepository.findById(boardId)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 게시판입니다."));
+            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시판입니다."));
         Long boardMemberId = board.getMember().getId();
-        if (memberId != boardMemberId) {
-            throw new RuntimeException("해당 게시글을 수정할 수 있는 권한이 없습니다.");
+        if (!memberId.equals(boardMemberId)) {
+            throw new IllegalArgumentException("해당 게시글을 수정할 수 있는 권한이 없습니다.");
         }
         board.changeContent(boardUpdateRequest.content());
         board.changeTitle(boardUpdateRequest.title());
@@ -55,7 +55,7 @@ public class BoardService {
     @Transactional(readOnly = true)
     public BoardResponse getBoard(Long boardId) {
         Board board = boardRepository.findById(boardId)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 게시판입니다."));
+            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시판입니다."));
         return BoardResponse.of(board);
     }
 
