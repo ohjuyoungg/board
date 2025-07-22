@@ -1,7 +1,8 @@
-INSERT INTO member (id, email, password, nickname) VALUES (1, 'posil@example.com', 'pass1', '포실이');
-INSERT INTO member (id, email, password, nickname) VALUES (2, 'happy@example.com', 'pass2', '행복이');
-INSERT INTO member (id, email, password, nickname) VALUES (3, 'JJingJJing@example.com', 'pass3', '찡찡이');
-INSERT INTO member (id, email, password, nickname) VALUES (4, 'makdong@example.com', 'pass4', '막동이');
+-- Member 데이터 (id 생략)
+INSERT INTO member (email, password, nickname) VALUES ('posil@example.com', 'pass1', '포실이');
+INSERT INTO member (email, password, nickname) VALUES ('happy@example.com', 'pass2', '행복이');
+INSERT INTO member (email, password, nickname) VALUES ('JJingJJing@example.com', 'pass3', '찡찡이');
+INSERT INTO member (email, password, nickname) VALUES ('makdong@example.com', 'pass4', '막동이');
 
 INSERT INTO board (title, content, image, member_id) VALUES ('Title 1', 'Content 1', 'img1.jpg', 1);
 INSERT INTO board (title, content, image, member_id) VALUES ('Title 2', 'Content 2', 'img2.jpg', 1);
