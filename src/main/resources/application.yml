@@ -5,6 +5,7 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
+      default_batch_fetch_size: 100
   h2:
     console:
       enabled: true
