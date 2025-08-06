@@ -1,19 +1,15 @@
 spring:
   application.name: Juyoung
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
       default_batch_fetch_size: 100
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:dev
-    username: sa
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board
+    username: root
     password:
   sql:
     init:
