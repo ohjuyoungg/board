@@ -1,5 +1,7 @@
 package Board.Juyoung.controller.dto.request;
 
-public record BoardWriteRequest(String title, String content, String image) {
+import jakarta.validation.constraints.NotNull;
+
+public record BoardWriteRequest(@NotNull String title, String content, String image) {
 
 }
