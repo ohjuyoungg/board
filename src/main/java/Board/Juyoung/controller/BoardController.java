@@ -4,6 +4,7 @@ import Board.Juyoung.controller.dto.request.BoardUpdateRequest;
 import Board.Juyoung.controller.dto.request.BoardWriteRequest;
 import Board.Juyoung.controller.dto.response.BoardResponse;
 import Board.Juyoung.service.BoardService;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class BoardController {
 
     @PostMapping("/{memberId}")
     public ResponseEntity<Void> write(@PathVariable("memberId") Long memberId,
-        @RequestBody BoardWriteRequest boardWriteRequest) {
+        @RequestBody @Valid BoardWriteRequest boardWriteRequest) {
         boardService.write(memberId, boardWriteRequest);
         return ResponseEntity
             .ok()
