@@ -1,2 +1,5 @@
-package Board.Juyoung.exception.handler;public class BoardExceptionHandler {
+package Board.Juyoung.exception.handler;
+
+public class BoardExceptionHandler {
+
 }
