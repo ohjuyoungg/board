@@ -5,6 +5,7 @@ import Board.Juyoung.controller.dto.request.BoardWriteRequest;
 import Board.Juyoung.controller.dto.response.BoardResponse;
 import Board.Juyoung.entity.Board;
 import Board.Juyoung.entity.Member;
+import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.repository.BoardRepository;
 import Board.Juyoung.repository.MemberRepository;
 import java.util.List;
@@ -22,7 +23,7 @@ public class BoardService {
     @Transactional
     public void write(Long memberId, BoardWriteRequest boardWriteRequest) {
         Member member = memberRepository.findById(memberId)
-            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
+            .orElseThrow(() -> new MemberNotFoundException("존재하지 않는 유저입니다."));
         Board board = new Board(boardWriteRequest.title(), boardWriteRequest.content(), boardWriteRequest.image(),
             member);
         boardRepository.save(board);
