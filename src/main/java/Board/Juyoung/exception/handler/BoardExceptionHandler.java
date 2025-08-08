@@ -2,6 +2,7 @@ package Board.Juyoung.exception.handler;
 
 import Board.Juyoung.controller.BoardController;
 import Board.Juyoung.exception.custom.BoardNotFoundException;
+import Board.Juyoung.exception.custom.BoardPermissionDeniedException;
 import Board.Juyoung.exception.dto.ErrorResponse;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -27,5 +28,21 @@ public class BoardExceptionHandler {
             .build();
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
+     * 게시판 수정 / 삭제 권한이 없을 때 발생하는 예외 처리
+     */
+    @ExceptionHandler(BoardPermissionDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleBoardPermissionDenied(BoardPermissionDeniedException ex) {
+        ErrorResponse response = ErrorResponse.builder()
+            .code("BOARD_PERMISSION_DENIED")
+            .message(ex.getMessage())
+            .status(HttpStatus.FORBIDDEN.value())
+            .timestamp(LocalDateTime.now())
+            .details(Collections.singletonList("해당 게시글에 대한 권한을 확인해주세요."))
+            .build();
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
     }
 }
