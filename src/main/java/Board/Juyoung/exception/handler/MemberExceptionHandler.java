@@ -4,14 +4,14 @@ import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.exception.dto.ErrorResponse;
 import java.time.LocalDateTime;
 import java.util.Collections;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-@Slf4j
+@Order(0)
 public class MemberExceptionHandler {
 
     /**
@@ -19,7 +19,6 @@ public class MemberExceptionHandler {
      */
     @ExceptionHandler(MemberNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleMemberNotFound(MemberNotFoundException ex) {
-        log.error("test");
         ErrorResponse response = ErrorResponse.builder()
             .code("MEMBER_NOT_FOUND")
             .message(ex.getMessage()) // 예외에서 전달된 메시지 사용
