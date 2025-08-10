@@ -1,9 +1,9 @@
 package Board.Juyoung.controller;
 
-import Board.Juyoung.controller.dto.request.BoardUpdateRequest;
-import Board.Juyoung.controller.dto.request.BoardWriteRequest;
-import Board.Juyoung.controller.dto.response.BoardResponse;
 import Board.Juyoung.service.BoardService;
+import Board.Juyoung.service.dto.request.BoardUpdateRequest;
+import Board.Juyoung.service.dto.request.BoardWriteRequest;
+import Board.Juyoung.service.dto.response.BoardResponse;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

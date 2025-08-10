@@ -1,4 +1,4 @@
-package Board.Juyoung.controller.dto.request;
+package Board.Juyoung.service.dto.request;
 
 public record MemberCreateRequest(String email, String password, String nickname) {
 

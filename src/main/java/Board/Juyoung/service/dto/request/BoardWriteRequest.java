@@ -1,4 +1,4 @@
-package Board.Juyoung.controller.dto.request;
+package Board.Juyoung.service.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 

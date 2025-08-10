@@ -1,11 +1,11 @@
 package Board.Juyoung.service;
 
-import Board.Juyoung.controller.dto.request.MemberCreateRequest;
-import Board.Juyoung.controller.dto.request.MemberUpdateRequest;
-import Board.Juyoung.controller.dto.response.MemberResponse;
 import Board.Juyoung.entity.Member;
 import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.repository.MemberRepository;
+import Board.Juyoung.service.dto.request.MemberCreateRequest;
+import Board.Juyoung.service.dto.request.MemberUpdateRequest;
+import Board.Juyoung.service.dto.response.MemberResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

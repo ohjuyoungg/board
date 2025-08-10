@@ -1,8 +1,5 @@
 package Board.Juyoung.service;
 
-import Board.Juyoung.controller.dto.request.BoardUpdateRequest;
-import Board.Juyoung.controller.dto.request.BoardWriteRequest;
-import Board.Juyoung.controller.dto.response.BoardResponse;
 import Board.Juyoung.entity.Board;
 import Board.Juyoung.entity.Member;
 import Board.Juyoung.exception.custom.BoardNotFoundException;
@@ -10,6 +7,9 @@ import Board.Juyoung.exception.custom.BoardPermissionDeniedException;
 import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.repository.BoardRepository;
 import Board.Juyoung.repository.MemberRepository;
+import Board.Juyoung.service.dto.request.BoardUpdateRequest;
+import Board.Juyoung.service.dto.request.BoardWriteRequest;
+import Board.Juyoung.service.dto.response.BoardResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

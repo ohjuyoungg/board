@@ -1,4 +1,4 @@
-package Board.Juyoung.controller.dto.response;
+package Board.Juyoung.service.dto.response;
 
 import Board.Juyoung.entity.Board;
 import Board.Juyoung.entity.Member;
