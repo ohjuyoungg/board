@@ -6,8 +6,12 @@ import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.exception.dto.ErrorResponse;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -20,7 +24,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
         ErrorResponse response = ErrorResponse.builder()
-            .code("INTERNAL_SERVER_ERROR")
             .message("서버에서 오류가 발생했습니다.")
             .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
             .timestamp(LocalDateTime.now())
@@ -36,7 +39,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BoardNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleBoardNotFound(BoardNotFoundException ex) {
         ErrorResponse response = ErrorResponse.builder()
-            .code("BOARD_NOT_FOUND")
             .message(ex.getMessage())
             .status(HttpStatus.NOT_FOUND.value())
             .timestamp(LocalDateTime.now())
@@ -52,7 +54,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BoardPermissionDeniedException.class)
     public ResponseEntity<ErrorResponse> handleBoardPermissionDenied(BoardPermissionDeniedException ex) {
         ErrorResponse response = ErrorResponse.builder()
-            .code("BOARD_PERMISSION_DENIED")
             .message(ex.getMessage())
             .status(HttpStatus.FORBIDDEN.value())
             .timestamp(LocalDateTime.now())
@@ -68,7 +69,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MemberNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleMemberNotFound(MemberNotFoundException ex) {
         ErrorResponse response = ErrorResponse.builder()
-            .code("MEMBER_NOT_FOUND")
             .message(ex.getMessage())
             .status(HttpStatus.NOT_FOUND.value())
             .timestamp(LocalDateTime.now())
@@ -76,6 +76,25 @@ public class GlobalExceptionHandler {
             .build();
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
+     * Bean Validation 발생하는 예외 처리
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+
+        ErrorResponse response = ErrorResponse.builder()
+            .status(HttpStatus.BAD_REQUEST.value())
+            .timestamp(LocalDateTime.now())
+            .errors(errors)
+            .build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
 
