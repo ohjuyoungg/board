@@ -1,5 +1,7 @@
 package Board.Juyoung.service.dto.request;
 
-public record MemberCreateRequest(String email, String password, String nickname) {
+import jakarta.validation.constraints.NotBlank;
+
+public record MemberCreateRequest(@NotBlank String email, @NotBlank String password, String nickname) {
 
 }
