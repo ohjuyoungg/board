@@ -66,7 +66,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //userDTO를 생성하여 값 set
         UserLoginResponse userDTO = new UserLoginResponse();
-        userDTO.setUsername(username);
+        userDTO.setName(username);
         userDTO.setRole(role);
 
         //UserDetails에 회원 정보 객체 담기
