@@ -19,8 +19,9 @@ public class MemberService {
 
     @Transactional
     public void register(MemberCreateRequest memberCreateRequest) {
-        Member member = new Member(memberCreateRequest.email(), memberCreateRequest.password(),
-            memberCreateRequest.nickname());
+        Member member = new Member(memberCreateRequest.loginId(), memberCreateRequest.email(),
+            memberCreateRequest.password(),
+            memberCreateRequest.nickname(), memberCreateRequest.profileImage());
         memberRepository.save(member);
     }
 
