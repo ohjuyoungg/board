@@ -7,7 +7,7 @@
 ### System Architecture
 
 <div align="center">
-  <img src="img_1.png" alt="System Architecture" style="max-width:600px;">
+  <img src="img_1.png" alt="System Architecture" style="max-width:200px;">
 </div>
 
 ---
