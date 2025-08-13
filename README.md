@@ -10,7 +10,10 @@
 
 ### System Architecture
 
-![img_1.png](img_1.png)
+<!-- 시스템 아키텍처 그림 크기 조정 -->
+<div align="left">
+  <img src="img_1.png" alt="System Architecture" style="max-width:400px;">
+</div>
 
 ---
 
