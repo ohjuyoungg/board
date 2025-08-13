@@ -1,4 +1,4 @@
-# 📌 NoticeNet 프로젝트
+# 📌 BoardLab 프로젝트
 
 ## 🏗 Architecture
 
