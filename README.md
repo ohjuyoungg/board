@@ -1,4 +1,4 @@
-# 📌 나의 게시판 프로젝트
+# 📌 NoticeNet 프로젝트
 
 ## 🏗 Architecture
 
