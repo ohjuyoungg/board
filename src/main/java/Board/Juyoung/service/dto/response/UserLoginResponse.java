@@ -9,5 +9,4 @@ public class UserLoginResponse {
 
     private String role;
     private String name;
-    private String username;
 }
