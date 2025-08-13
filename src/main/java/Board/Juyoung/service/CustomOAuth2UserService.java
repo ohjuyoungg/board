@@ -4,9 +4,10 @@ import Board.Juyoung.entity.Member;
 import Board.Juyoung.repository.MemberRepository;
 import Board.Juyoung.service.dto.CustomOAuth2User;
 import Board.Juyoung.service.dto.response.GoogleResponse;
-import Board.Juyoung.service.dto.response.NaverResponse;
+import Board.Juyoung.service.dto.response.KakaoResponse;
 import Board.Juyoung.service.dto.response.OAuth2Response;
 import Board.Juyoung.service.dto.response.UserLoginResponse;
+import java.util.Optional;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -24,44 +25,45 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-
         OAuth2User oAuth2User = super.loadUser(userRequest);
         System.out.println(oAuth2User);
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response;
-        if (registrationId.equals("naver")) {
-            oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
+        if (registrationId.equals("kakao")) {
+            oAuth2Response = new KakaoResponse(oAuth2User.getAttributes());
         } else if (registrationId.equals("google")) {
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
         } else {
             return null;
         }
 
-        // OAuth provider + id를 username 대신 email 기반으로 저장
-        String email = oAuth2Response.getEmail();
-        Member existMember = memberRepository.findByEmail(email);
+        // OAuth provider + id
+        String provider = oAuth2Response.getProvider();
+        String providerId = oAuth2Response.getProviderId();
+        String loginId = provider + "-" + providerId;
 
-        if (existMember == null) {
-            // 신규 회원
-            Member newMember = new Member(email, "", oAuth2Response.getName());
-            memberRepository.save(newMember);
+        Optional<Member> member = memberRepository.findByLoginId(loginId);
+
+        if (member.isPresent()) {
+            // 기존 회원
+            Member existingMember = member.get();
+            existingMember.changeNickname(oAuth2Response.getName());
+            existingMember.changeProfileImage(oAuth2Response.getProfileImage());
+            memberRepository.save(existingMember);
 
             UserLoginResponse userDTO = new UserLoginResponse();
-            userDTO.setUsername(email);
-            userDTO.setName(oAuth2Response.getName());
+            userDTO.setName(loginId);
             userDTO.setRole("ROLE_USER");
 
             return new CustomOAuth2User(userDTO);
         } else {
-            // 기존 회원 정보 업데이트
-            existMember.changeNickname(oAuth2Response.getName());
-            existMember.changeEmail(email);
-            memberRepository.save(existMember);
+            // 신규 회원
+            Member newMember = new Member(loginId, "", "", oAuth2Response.getName(), oAuth2Response.getProfileImage());
+            memberRepository.save(newMember);
 
             UserLoginResponse userDTO = new UserLoginResponse();
-            userDTO.setUsername(email);
-            userDTO.setName(oAuth2Response.getName());
+            userDTO.setName(loginId);
             userDTO.setRole("ROLE_USER");
 
             return new CustomOAuth2User(userDTO);
