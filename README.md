@@ -6,8 +6,8 @@
 
 ### System Architecture
 
-<div align="center">
-  <img src="img_1.png" alt="System Architecture" style="max-width:200px;">
+<div align="left">
+  <img src="https://github.com/ohjuyoungg/board/blob/dev/img_1.png?raw=true" alt="System Architecture" style="max-width:300px;">
 </div>
 
 ---
