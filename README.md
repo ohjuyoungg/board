@@ -4,7 +4,7 @@
 
 ### System Architecture
 
-<img src="https://github.com/ohjuyoungg/board/blob/dev/img_1.png?raw=true" alt="System Architecture" width="700">
+<img src="https://github.com/ohjuyoungg/board/blob/dev/img_1.png?raw=true" alt="System Architecture" width="500">
 
 ---
 
