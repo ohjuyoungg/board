@@ -1,14 +1,10 @@
 # 📌 나의 게시판 프로젝트
 
----
-
 ## 🏗 Architecture
 
 ### System Architecture
 
-<div align="left">
-  <img src="https://github.com/ohjuyoungg/board/blob/dev/img_1.png?raw=true" alt="System Architecture" style="max-width:300px;">
-</div>
+<img src="https://github.com/ohjuyoungg/board/blob/dev/img_1.png?raw=true" alt="System Architecture" width="700">
 
 ---
 
