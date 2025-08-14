@@ -10,10 +10,12 @@ import Board.Juyoung.repository.MemberRepository;
 import Board.Juyoung.service.dto.request.BoardUpdateRequest;
 import Board.Juyoung.service.dto.request.BoardWriteRequest;
 import Board.Juyoung.service.dto.response.BoardResponse;
+import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Service
@@ -21,13 +23,17 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
+    private final S3Service s3Service;
 
     @Transactional
-    public void write(Long memberId, BoardWriteRequest boardWriteRequest) {
+    public void write(Long memberId, BoardWriteRequest boardWriteRequest, MultipartFile image) throws IOException {
         Member member = memberRepository.findById(memberId)
             .orElseThrow(() -> new MemberNotFoundException("존재하지 않는 유저입니다."));
-        Board board = new Board(boardWriteRequest.title(), boardWriteRequest.content(), boardWriteRequest.image(),
-            member);
+        String imageURL = null;
+        if (image != null && !image.isEmpty()) {
+            imageURL = s3Service.uploadImage(image);
+        }
+        Board board = new Board(boardWriteRequest.title(), boardWriteRequest.content(), imageURL, member);
         boardRepository.save(board);
     }
 
@@ -43,7 +49,8 @@ public class BoardService {
     }
 
     @Transactional
-    public void update(Long memberId, Long boardId, BoardUpdateRequest boardUpdateRequest) {
+    public void update(Long memberId, Long boardId, BoardUpdateRequest boardUpdateRequest, MultipartFile image)
+        throws IOException {
         Board board = boardRepository.findById(boardId)
             .orElseThrow(() -> new BoardNotFoundException("존재하지 않는 게시판입니다."));
         Long boardMemberId = board.getMember().getId();
@@ -52,7 +59,10 @@ public class BoardService {
         }
         board.changeContent(boardUpdateRequest.content());
         board.changeTitle(boardUpdateRequest.title());
-        board.changeImage(boardUpdateRequest.image());
+        if (image != null && !image.isEmpty()) {
+            String imageURL = s3Service.uploadImage(image);
+            board.changeImage(imageURL);
+        }
     }
 
     @Transactional(readOnly = true)
