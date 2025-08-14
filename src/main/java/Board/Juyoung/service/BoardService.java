@@ -26,7 +26,7 @@ public class BoardService {
     private final S3Service s3Service;
 
     @Transactional
-    public void write(Long memberId, BoardWriteRequest boardWriteRequest, MultipartFile image) throws IOException {
+    public void write(Long memberId, BoardWriteRequest boardWriteRequest, MultipartFile image) {
         Member member = memberRepository.findById(memberId)
             .orElseThrow(() -> new MemberNotFoundException("존재하지 않는 유저입니다."));
         String imageURL = null;
