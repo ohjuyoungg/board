@@ -4,7 +4,7 @@
 
 ### System Architecture
 
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/71004322/477931736-cd286261-8e43-44d8-9003-7981078eab19.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250814%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250814T085956Z&X-Amz-Expires=300&X-Amz-Signature=c208492bb15c33224b10ea43630117629a6569235b18d97c03347c5536f962b8&X-Amz-SignedHeaders=host" alt="System Architecture" width="500">
+![img_1.png](img_1.png)
 
 ---
 
