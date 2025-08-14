@@ -45,7 +45,11 @@ public class BoardService {
         if (!memberId.equals(boardMemberId)) {
             throw new BoardPermissionDeniedException("해당 게시글을 삭제할 수 있는 권한이 없습니다.");
         }
-        boardRepository.deleteById(boardId);
+        String imageUrl = board.getImage();
+        if (imageUrl != null) {
+            s3Service.deleteImage(imageUrl);
+        }
+        boardRepository.delete(board);
     }
 
     @Transactional
@@ -57,11 +61,12 @@ public class BoardService {
         if (!memberId.equals(boardMemberId)) {
             throw new BoardPermissionDeniedException("해당 게시글을 수정할 수 있는 권한이 없습니다.");
         }
+        String imageUrl = board.getImage();
         board.changeContent(boardUpdateRequest.content());
         board.changeTitle(boardUpdateRequest.title());
-        if (image != null && !image.isEmpty()) {
-            String imageURL = s3Service.uploadImage(image);
-            board.changeImage(imageURL);
+        if (imageUrl != null) {
+            s3Service.deleteImage(imageUrl);
+            board.changeImage(s3Service.uploadImage(image));
         }
     }
 
