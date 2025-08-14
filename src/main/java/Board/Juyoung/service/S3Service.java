@@ -23,9 +23,6 @@ public class S3Service {
     @Value("${spring.cloud.aws.s3.bucket}")
     private String bucket;
 
-    @Value("${spring.cloud.aws.region.static}")
-    private String region;
-
 
     public String uploadImage(MultipartFile image) {
         String originalFilename = image.getOriginalFilename();
