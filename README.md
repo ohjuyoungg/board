@@ -15,11 +15,11 @@
 <p>
   <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" style="height:30px;"/>
   <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" style="height:30px;"/>
+  <img src="https://img.shields.io/badge/JPA-FF3621?style=for-the-badge&logo=Databricks&logoColor=white" style="height:30px;">
   <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" style="height:30px;"/>
   <img src="https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white" style="height:30px;"/>
   <img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" style="height:30px;"/>
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white" style="height:30px;"/>
-  <img src="https://img.shields.io/badge/JPA-FF3621?style=for-the-badge&logo=Databricks&logoColor=white" style="height:30px;">
 </p>
 
 - Java 17
@@ -36,10 +36,12 @@
 
 <p>
   <img src="https://img.shields.io/badge/AWS_EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white" style="height:30px;"/>
+  <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white" style="height:30px">
   <img src="https://img.shields.io/badge/GitHubActions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" style="height:30px;"/>
 </p>
 
 - AWS EC2 (Ubuntu)
+- AWS S3
 - GitHub Actions
 
 ---
