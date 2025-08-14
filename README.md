@@ -27,6 +27,8 @@ BoardLab은 온라인 커뮤니티에서 자주 활용되는 게시판 기능을
   <img src="https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white" style="height:30px;"/>
   <img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" style="height:30px;"/>
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white" style="height:30px;"/>
+    <img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white">
+
 </p>
 
 - Java 17
@@ -36,6 +38,7 @@ BoardLab은 온라인 커뮤니티에서 자주 활용되는 게시판 기능을
 - Spring Security
 - JWT
 - Postman
+- Swagger API 문서화
 
 ---
 
