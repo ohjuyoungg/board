@@ -4,7 +4,7 @@ import Board.Juyoung.service.BoardService;
 import Board.Juyoung.service.dto.request.BoardUpdateRequest;
 import Board.Juyoung.service.dto.request.BoardWriteRequest;
 import Board.Juyoung.service.dto.response.BoardResponse;
-import jakarta.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/boards")
@@ -26,8 +27,10 @@ public class BoardController {
 
     @PostMapping("/{memberId}")
     public ResponseEntity<Void> write(@PathVariable("memberId") Long memberId,
-        @RequestBody @Valid BoardWriteRequest boardWriteRequest) {
-        boardService.write(memberId, boardWriteRequest);
+        @RequestPart("data") BoardWriteRequest boardWriteRequest,
+        @RequestPart(value = "image", required = false) MultipartFile image)
+        throws IOException {
+        boardService.write(memberId, boardWriteRequest, image);
         return ResponseEntity
             .ok()
             .build();
@@ -43,8 +46,10 @@ public class BoardController {
 
     @PutMapping("/{memberId}/{boardId}")
     public ResponseEntity<Void> update(@PathVariable("memberId") Long memberId, @PathVariable("boardId") Long boardId,
-        @RequestBody BoardUpdateRequest boardUpdateRequest) {
-        boardService.update(memberId, boardId, boardUpdateRequest);
+        @RequestPart("data") BoardUpdateRequest boardUpdateRequest,
+        @RequestPart(value = "image", required = false) MultipartFile image)
+        throws IOException {
+        boardService.update(memberId, boardId, boardUpdateRequest, image);
         return ResponseEntity
             .noContent()
             .build();
