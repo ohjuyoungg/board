@@ -1,5 +1,7 @@
 package Board.Juyoung.service.dto.request;
 
-public record BoardUpdateRequest(String title, String content, String image) {
+import jakarta.validation.constraints.NotBlank;
+
+public record BoardUpdateRequest(@NotBlank String title, @NotBlank String content) {
 
 }
