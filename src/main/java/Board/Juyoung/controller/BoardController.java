@@ -27,9 +27,8 @@ public class BoardController {
 
     @PostMapping("/{memberId}")
     public ResponseEntity<Void> write(@PathVariable("memberId") Long memberId,
-        @RequestPart("data") BoardWriteRequest boardWriteRequest,
-        @RequestPart(value = "image", required = false) MultipartFile image)
-        throws IOException {
+        BoardWriteRequest boardWriteRequest,
+        @RequestPart(required = false) MultipartFile image) {
         boardService.write(memberId, boardWriteRequest, image);
         return ResponseEntity
             .ok()
@@ -46,8 +45,8 @@ public class BoardController {
 
     @PutMapping("/{memberId}/{boardId}")
     public ResponseEntity<Void> update(@PathVariable("memberId") Long memberId, @PathVariable("boardId") Long boardId,
-        @RequestPart("data") BoardUpdateRequest boardUpdateRequest,
-        @RequestPart(value = "image", required = false) MultipartFile image)
+        BoardUpdateRequest boardUpdateRequest,
+        @RequestPart(required = false) MultipartFile image)
         throws IOException {
         boardService.update(memberId, boardId, boardUpdateRequest, image);
         return ResponseEntity
