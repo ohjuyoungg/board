@@ -65,5 +65,4 @@ public class CommentController {
         Pageable pageable) {
         return ResponseEntity.ok(commentService.getComments(boardId, pageable));
     }
-
 }
