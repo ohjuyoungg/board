@@ -23,7 +23,6 @@ public class S3Service {
     @Value("${spring.cloud.aws.s3.bucket}")
     private String bucket;
 
-
     public String uploadImage(MultipartFile image) {
         String originalFilename = image.getOriginalFilename();
         if (originalFilename == null || originalFilename.isBlank()) {
