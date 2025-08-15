@@ -6,8 +6,10 @@ import Board.Juyoung.service.dto.request.MemberUpdateRequest;
 import Board.Juyoung.service.dto.response.MemberResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,7 +64,7 @@ public class MemberController {
 
     @Operation(summary = "회원 목록 조회")
     @GetMapping
-    public ResponseEntity<List<MemberResponse>> getMembers() {
-        return ResponseEntity.ok(memberService.getMembers());
+    public ResponseEntity<Page<MemberResponse>> getMembers(@PageableDefault(size = 5) Pageable pageable) {
+        return ResponseEntity.ok(memberService.getMembers(pageable));
     }
 }
