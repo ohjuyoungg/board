@@ -4,6 +4,8 @@ import Board.Juyoung.entity.Board;
 import Board.Juyoung.entity.Comment;
 import Board.Juyoung.entity.Member;
 import Board.Juyoung.exception.custom.BoardNotFoundException;
+import Board.Juyoung.exception.custom.CommentNotFoundException;
+import Board.Juyoung.exception.custom.CommentPermissionDeniedException;
 import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.repository.BoardRepository;
 import Board.Juyoung.repository.CommentRepository;
@@ -38,10 +40,10 @@ public class CommentService {
     @Transactional
     public void delete(Long commentId, Long memberId) {
         Comment comment = commentRepository.findById(commentId)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 댓글입니다."));
+            .orElseThrow(() -> new CommentNotFoundException("존재하지 않는 댓글입니다."));
         Long commentMemberId = comment.getMember().getId();
         if (!commentMemberId.equals(memberId)) {
-            throw new RuntimeException("해당 댓글을 삭제할 수 있는 권한이 없습니다.");
+            throw new CommentPermissionDeniedException("해당 댓글을 삭제할 수 있는 권한이 없습니다.");
         }
         commentRepository.delete(comment);
     }
@@ -49,10 +51,10 @@ public class CommentService {
     @Transactional
     public void update(Long commentId, Long memberId, CommentUpdateRequest commentUpdateRequest) {
         Comment comment = commentRepository.findById(commentId)
-            .orElseThrow(() -> new RuntimeException("존재하지 않는 댓글입니다."));
+            .orElseThrow(() -> new CommentNotFoundException("존재하지 않는 댓글입니다."));
         Long commentMemberId = comment.getMember().getId();
         if (!commentMemberId.equals(memberId)) {
-            throw new RuntimeException("해당 댓글을 삭제할 수 있는 권한이 없습니다.");
+            throw new CommentPermissionDeniedException("해당 댓글을 삭제할 수 있는 권한이 없습니다.");
         }
         comment.changeContent(commentUpdateRequest.content());
     }
