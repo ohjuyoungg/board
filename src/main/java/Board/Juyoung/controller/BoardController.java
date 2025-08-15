@@ -8,8 +8,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -71,7 +71,7 @@ public class BoardController {
 
     @Operation(summary = "게시물 목록 조회")
     @GetMapping
-    public ResponseEntity<Slice<BoardResponse>> getBoards(
+    public ResponseEntity<Page<BoardResponse>> getBoards(
         @PageableDefault(size = 10, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(boardService.getBoards(pageable));
     }
