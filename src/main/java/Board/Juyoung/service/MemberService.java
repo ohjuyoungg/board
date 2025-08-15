@@ -5,6 +5,7 @@ import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.repository.MemberRepository;
 import Board.Juyoung.service.dto.request.MemberCreateRequest;
 import Board.Juyoung.service.dto.request.MemberUpdateRequest;
+import Board.Juyoung.service.dto.response.CurrentMemberResponse;
 import Board.Juyoung.service.dto.response.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -51,5 +52,12 @@ public class MemberService {
     public Page<MemberResponse> getMembers(Pageable pageable) {
         Page<Member> page = memberRepository.findAll(pageable);
         return page.map(MemberResponse::of);
+    }
+
+    @Transactional(readOnly = true)
+    public CurrentMemberResponse getCurrentMember(String loginId) {
+        Member member = memberRepository.findByLoginId(loginId)
+            .orElseThrow(() -> new MemberNotFoundException("존재하지 않는 유저입니다."));
+        return CurrentMemberResponse.of(member);
     }
 }
