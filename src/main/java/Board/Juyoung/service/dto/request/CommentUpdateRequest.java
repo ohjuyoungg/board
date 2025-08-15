@@ -1,2 +1,5 @@
-package Board.Juyoung.service.dto.request;public class CommentUpdateRequest {
+package Board.Juyoung.service.dto.request;
+
+public record CommentUpdateRequest(String content) {
+
 }
