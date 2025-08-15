@@ -36,7 +36,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String role = auth.getAuthority();
         String token = jwtUtil.createJwt(username, role, 60 * 60 * 60L);
         response.sendRedirect(
-            "http://yong-2026.s3-website.ap-northeast-2.amazonaws.com/oauth-success?" + "accessToken" + token);
+            "http://yong-2026.s3-website.ap-northeast-2.amazonaws.com/oauth-success?" + "accessToken=" + token);
     }
 
     private Cookie createCookie(String key, String value) {
