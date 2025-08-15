@@ -3,6 +3,7 @@ package Board.Juyoung.controller;
 import Board.Juyoung.service.MemberService;
 import Board.Juyoung.service.dto.request.MemberCreateRequest;
 import Board.Juyoung.service.dto.request.MemberUpdateRequest;
+import Board.Juyoung.service.dto.response.CurrentMemberResponse;
 import Board.Juyoung.service.dto.response.MemberResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,5 +69,13 @@ public class MemberController {
     @GetMapping
     public ResponseEntity<Page<MemberResponse>> getMembers(@PageableDefault(size = 5) Pageable pageable) {
         return ResponseEntity.ok(memberService.getMembers(pageable));
+    }
+
+    @Operation(summary = "로그인한 회원 조회")
+    @GetMapping("/me")
+    public ResponseEntity<CurrentMemberResponse> getCurrentMember(@AuthenticationPrincipal OAuth2User loginUser) {
+        String loginId = loginUser.getName();
+        return ResponseEntity
+            .ok(memberService.getCurrentMember(loginId));
     }
 }
