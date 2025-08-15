@@ -6,11 +6,15 @@ import Board.Juyoung.exception.custom.BoardNotFoundException;
 import Board.Juyoung.exception.custom.BoardPermissionDeniedException;
 import Board.Juyoung.exception.custom.MemberNotFoundException;
 import Board.Juyoung.repository.BoardRepository;
+import Board.Juyoung.repository.CommentRepository;
 import Board.Juyoung.repository.MemberRepository;
 import Board.Juyoung.service.dto.request.BoardUpdateRequest;
 import Board.Juyoung.service.dto.request.BoardWriteRequest;
+import Board.Juyoung.service.dto.response.BoardListResponse;
 import Board.Juyoung.service.dto.response.BoardResponse;
+import Board.Juyoung.service.dto.response.CommentResponse;
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +28,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
+    private final CommentRepository commentRepository;
     private final S3Service s3Service;
 
     @Transactional
@@ -72,15 +77,19 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public BoardResponse getBoard(Long boardId) {
+    public BoardResponse getBoard(Long boardId, Pageable pageable) {
         Board board = boardRepository.findById(boardId)
             .orElseThrow(() -> new BoardNotFoundException("존재하지 않는 게시판입니다."));
-        return BoardResponse.of(board);
+        List<CommentResponse> commentDTO = commentRepository.findByBoardIdOrderByCreatedDateAsc(boardId, pageable)
+            .stream()
+            .map(CommentResponse::of)
+            .toList();
+        return BoardResponse.of(board, commentDTO);
     }
 
     @Transactional(readOnly = true)
-    public Page<BoardResponse> getBoards(Pageable pageable) {
+    public Page<BoardListResponse> getBoards(Pageable pageable) {
         Page<Board> boards = boardRepository.findByOrderByCreatedDateDesc(pageable);
-        return boards.map(BoardResponse::of);
+        return boards.map(BoardListResponse::of);
     }
 }
