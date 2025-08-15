@@ -7,8 +7,11 @@ import Board.Juyoung.service.dto.response.BoardResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,7 +71,8 @@ public class BoardController {
 
     @Operation(summary = "게시물 목록 조회")
     @GetMapping
-    public ResponseEntity<List<BoardResponse>> getBoards() {
-        return ResponseEntity.ok(boardService.getBoards());
+    public ResponseEntity<Slice<BoardResponse>> getBoards(
+        @PageableDefault(size = 10, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(boardService.getBoards(pageable));
     }
 }
