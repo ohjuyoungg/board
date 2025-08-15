@@ -3,6 +3,7 @@ package Board.Juyoung.controller;
 import Board.Juyoung.service.BoardService;
 import Board.Juyoung.service.dto.request.BoardUpdateRequest;
 import Board.Juyoung.service.dto.request.BoardWriteRequest;
+import Board.Juyoung.service.dto.response.BoardListResponse;
 import Board.Juyoung.service.dto.response.BoardResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -65,13 +66,13 @@ public class BoardController {
 
     @Operation(summary = "게시물 단건 조회")
     @GetMapping("/{boardId}")
-    public ResponseEntity<BoardResponse> getBoard(@PathVariable("boardId") Long boardId) {
-        return ResponseEntity.ok(boardService.getBoard(boardId));
+    public ResponseEntity<BoardResponse> getBoard(@PathVariable("boardId") Long boardId, Pageable pageable) {
+        return ResponseEntity.ok(boardService.getBoard(boardId, pageable));
     }
 
     @Operation(summary = "게시물 목록 조회")
     @GetMapping
-    public ResponseEntity<Page<BoardResponse>> getBoards(
+    public ResponseEntity<Page<BoardListResponse>> getBoards(
         @PageableDefault(size = 10, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(boardService.getBoards(pageable));
     }
