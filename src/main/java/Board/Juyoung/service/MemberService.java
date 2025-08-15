@@ -6,8 +6,9 @@ import Board.Juyoung.repository.MemberRepository;
 import Board.Juyoung.service.dto.request.MemberCreateRequest;
 import Board.Juyoung.service.dto.request.MemberUpdateRequest;
 import Board.Juyoung.service.dto.response.MemberResponse;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,9 +48,8 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberResponse> getMembers() {
-        return memberRepository.findAll().stream()
-            .map(MemberResponse::of) // m -> MemberResponse.of(m)
-            .toList();
+    public Page<MemberResponse> getMembers(Pageable pageable) {
+        Page<Member> page = memberRepository.findAll(pageable);
+        return page.map(MemberResponse::of);
     }
 }
