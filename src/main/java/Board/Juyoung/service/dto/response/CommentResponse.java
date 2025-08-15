@@ -1,14 +1,24 @@
 package Board.Juyoung.service.dto.response;
 
 
+import Board.Juyoung.entity.Comment;
+import java.time.LocalDateTime;
+
 public record CommentResponse(
     Long commentId,
     Long memberId,
     String nickname,
-    String content
+    String content,
+    LocalDateTime createdDate
+
 ) {
 
-    public static CommentResponse of(Long commentId, Long memberId, String nickname, String content) {
-        return new CommentResponse(commentId, memberId, nickname, content);
+    public static CommentResponse of(Comment comment) {
+        return new CommentResponse(
+            comment.getId(),
+            comment.getMember().getId(),
+            comment.getMember().getNickname(),
+            comment.getContent(),
+            comment.getCreatedDate());
     }
 }
