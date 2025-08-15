@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class CommentController {
     @Operation(summary = "댓글 등록")
     @PostMapping("/{memberId}/{boardId}")
     public ResponseEntity<Void> write(@PathVariable("memberId") Long memberId, @PathVariable("boardId") Long boardId,
-        CommentWriteRequest commentWriteRequest) {
+        @RequestBody CommentWriteRequest commentWriteRequest) {
         commentService.write(memberId, boardId, commentWriteRequest);
         return ResponseEntity
             .ok()
@@ -51,7 +52,7 @@ public class CommentController {
     @Operation(summary = "댓글 수정")
     @PutMapping("/{memberId}/{commentId}")
     public ResponseEntity<Void> update(@PathVariable("memberId") Long memberId,
-        @PathVariable("commentId") Long commentId, CommentUpdateRequest commentUpdateRequest) {
+        @PathVariable("commentId") Long commentId, @RequestBody CommentUpdateRequest commentUpdateRequest) {
         commentService.update(memberId, commentId, commentUpdateRequest);
         return ResponseEntity
             .noContent()
