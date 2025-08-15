@@ -1,2 +1,5 @@
-package Board.Juyoung.service.dto.request;public class CommentWriteRequest {
+package Board.Juyoung.service.dto.request;
+
+public record CommentWriteRequest(String content) {
+
 }
