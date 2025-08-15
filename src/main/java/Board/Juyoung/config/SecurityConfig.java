@@ -3,8 +3,6 @@ package Board.Juyoung.config;
 import Board.Juyoung.jwt.JWTUtil;
 import Board.Juyoung.jwt.handler.CustomSuccessHandler;
 import Board.Juyoung.service.CustomOAuth2UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import java.util.Collections;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,25 +34,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            .cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
-
-                @Override
-                public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-
-                    CorsConfiguration configuration = new CorsConfiguration();
-
-                    configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-                    configuration.setAllowedMethods(Collections.singletonList("*"));
-                    configuration.setAllowCredentials(true);
-                    configuration.setAllowedHeaders(Collections.singletonList("*"));
-                    configuration.setMaxAge(3600L);
-
-                    configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
-                    configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-
-                    return configuration;
-                }
-            }));
+            .cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()));
 
         //csrf disable
         http
