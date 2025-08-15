@@ -12,8 +12,8 @@ import Board.Juyoung.service.dto.request.BoardWriteRequest;
 import Board.Juyoung.service.dto.response.BoardResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -79,8 +79,8 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public Slice<BoardResponse> getBoards(Pageable pageable) {
-        Slice<Board> boards = boardRepository.findByOrderByCreatedDateDesc(pageable);
+    public Page<BoardResponse> getBoards(Pageable pageable) {
+        Page<Board> boards = boardRepository.findByOrderByCreatedDateDesc(pageable);
         return boards.map(BoardResponse::of);
     }
 }
