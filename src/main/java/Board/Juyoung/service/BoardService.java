@@ -13,7 +13,7 @@ import Board.Juyoung.service.dto.request.BoardWriteRequest;
 import Board.Juyoung.service.dto.response.BoardListResponse;
 import Board.Juyoung.service.dto.response.BoardResponse;
 import Board.Juyoung.service.dto.response.CommentResponse;
-import java.io.IOException;
+import Board.Juyoung.service.dto.response.PageResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -59,8 +59,7 @@ public class BoardService {
     }
 
     @Transactional
-    public void update(Long memberId, Long boardId, BoardUpdateRequest boardUpdateRequest, MultipartFile image)
-        throws IOException {
+    public void update(Long memberId, Long boardId, BoardUpdateRequest boardUpdateRequest, MultipartFile image) {
         Board board = boardRepository.findById(boardId)
             .orElseThrow(() -> new BoardNotFoundException("존재하지 않는 게시판입니다."));
         Long boardMemberId = board.getMember().getId();
@@ -88,8 +87,9 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public Page<BoardListResponse> getBoards(Pageable pageable) {
+    public PageResponse<BoardListResponse> getBoards(Pageable pageable) {
         Page<Board> boards = boardRepository.findByOrderByCreatedDateDesc(pageable);
-        return boards.map(BoardListResponse::of);
+        Page<BoardListResponse> boardListResponses = boards.map(BoardListResponse::of);
+        return PageResponse.of(boardListResponses);
     }
 }

@@ -5,11 +5,11 @@ import Board.Juyoung.service.dto.request.BoardUpdateRequest;
 import Board.Juyoung.service.dto.request.BoardWriteRequest;
 import Board.Juyoung.service.dto.response.BoardListResponse;
 import Board.Juyoung.service.dto.response.BoardResponse;
+import Board.Juyoung.service.dto.response.PageResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -72,7 +72,7 @@ public class BoardController {
 
     @Operation(summary = "게시물 목록 조회")
     @GetMapping
-    public ResponseEntity<Page<BoardListResponse>> getBoards(
+    public ResponseEntity<PageResponse<BoardListResponse>> getBoards(
         @PageableDefault(size = 10, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(boardService.getBoards(pageable));
     }
