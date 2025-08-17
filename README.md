@@ -13,7 +13,7 @@ BoardLab은 온라인 커뮤니티에서 자주 활용되는 게시판 기능을
 
 ### System Architecture
 
-![img.png](img.png)
+![img_1.png](img_1.png)
 
 ---
 
