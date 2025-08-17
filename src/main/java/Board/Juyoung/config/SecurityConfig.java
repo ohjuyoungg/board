@@ -38,8 +38,7 @@ public class SecurityConfig {
                 .successHandler(customSuccessHandler)
             )
             .authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/**").permitAll() // 경로별 인가 작업
-                .anyRequest().authenticated())
+                .requestMatchers("/**").permitAll()) // 경로별 인가 작업
             .sessionManagement((session) -> session // 세션 설정 : STATELESS
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
