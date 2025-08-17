@@ -13,7 +13,8 @@ BoardLab은 온라인 커뮤니티에서 자주 활용되는 게시판 기능을
 
 ### System Architecture
 
-![스크린샷 2025-08-17 오후 7.12.08.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fct%2Fkb66zp2935s49_k_gv4bmtfm0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_VQo35C%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-08-17%20%EC%98%A4%ED%9B%84%207.12.08.png)
+![img.png](img.png)
+
 ---
 
 ## ⚙ Tech Stack
