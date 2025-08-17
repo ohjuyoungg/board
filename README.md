@@ -7,12 +7,14 @@ BoardLab은 온라인 커뮤니티에서 자주 활용되는 게시판 기능을
 
 - 개발 기간 : 2025. 06 ~ 진행 중
   <br>
+  <br>
 
 ## 🏗 Architecture
 
 ### System Architecture
 
-![boardLab.jpg](..%2FboardLab.jpg)
+![img_2.png](img_2.png)
+
 ---
 
 ## ⚙ Tech Stack
