@@ -6,13 +6,13 @@ BoardLab은 온라인 커뮤니티에서 자주 활용되는 게시판 기능을
 단순한 글 작성·조회 기능을 넘어, 사용자 친화적인 UI/UX와 안정적인 데이터 관리 구조를 기반으로 누구나 손쉽게 글을 작성하고 소통할 수 있도록 설계하였습니다.
 
 - 개발 기간 : 2025. 06 ~ 진행 중
+  <br>
 
 ## 🏗 Architecture
 
 ### System Architecture
 
-![img_1.png](img_1.png)
-
+![boardLab.jpg](..%2FboardLab.jpg)
 ---
 
 ## ⚙ Tech Stack
