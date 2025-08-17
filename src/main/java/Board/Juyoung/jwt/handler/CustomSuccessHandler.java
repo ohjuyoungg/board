@@ -34,18 +34,22 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
         GrantedAuthority auth = iterator.next();
         String role = auth.getAuthority();
-        String token = jwtUtil.createJwt(username, role, 60 * 60 * 60L);
-        response.sendRedirect(
-            "http://yong-2026.s3-website.ap-northeast-2.amazonaws.com/oauth-success?" + "accessToken=" + token);
+
+        // 토큰 생성
+        String accessToken = jwtUtil.createJwt(username, role, 30 * 60 * 1000L); // 30분
+        String refreshToken = jwtUtil.createJwt(username, role, 30 * 24 * 60 * 60 * 1000L); // 30일
+        String redirectUrl = "http://yong-2026.s3-website.ap-northeast-2.amazonaws.com/oauth-success?";
+
+        response.sendRedirect(redirectUrl + "accessToken=" + accessToken);
+        response.addCookie(createCookie(refreshToken));
     }
 
-    private Cookie createCookie(String key, String value) {
-        Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge(60 * 60 * 60);
-        //cookie.setSecure(true);
+    private Cookie createCookie(String refreshToken) {
+        Cookie cookie = new Cookie("refreshToken", refreshToken);
+        // cookie.setSecure(true); // https만 허용
+        cookie.setMaxAge(30 * 24 * 60 * 60);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
-
         return cookie;
     }
 }

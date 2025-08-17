@@ -1,7 +1,6 @@
 package Board.Juyoung.config;
 
 import Board.Juyoung.jwt.JWTFilter;
-import Board.Juyoung.jwt.JWTUtil;
 import Board.Juyoung.jwt.handler.CustomSuccessHandler;
 import Board.Juyoung.service.CustomOAuth2UserService;
 import java.util.List;
@@ -24,49 +23,25 @@ public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
-    private final JWTUtil jwtUtil;
     private final JWTFilter jwtFilter;
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http
-            .cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()));
-
-        //csrf disable
-        http
-            .csrf((auth) -> auth.disable());
-
-        //From 로그인 방식 disable
-        http
-            .formLogin((auth) -> auth.disable());
-
-        //HTTP Basic 인증 방식 disable
-        http
-            .httpBasic((auth) -> auth.disable());
-
-        //oauth2
-        http
+            .cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
+            .csrf((auth) -> auth.disable()) // csrf disable
+            .formLogin((auth) -> auth.disable()) // form 로그인 방식 disable
+            .httpBasic((auth) -> auth.disable()) // HTTP Basic 인증 방식 disable
             .oauth2Login((oauth2) -> oauth2
                 .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                     .userService(customOAuth2UserService))
                 .successHandler(customSuccessHandler)
-            );
-
-        //경로별 인가 작업
-        http
+            )
             .authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/**").permitAll()
-                .anyRequest().authenticated());
-
-        //세션 설정 : STATELESS
-        http
-            .sessionManagement((session) -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+                .requestMatchers("/**").permitAll()) // 경로별 인가 작업
+            .sessionManagement((session) -> session // 세션 설정 : STATELESS
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
