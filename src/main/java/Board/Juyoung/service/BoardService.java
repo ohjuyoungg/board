@@ -35,11 +35,11 @@ public class BoardService {
     public void write(Long memberId, BoardWriteRequest boardWriteRequest, MultipartFile image) {
         Member member = memberRepository.findById(memberId)
             .orElseThrow(() -> new MemberNotFoundException("존재하지 않는 유저입니다."));
-        String imageURL = null;
+        String imageUrl = null;
         if (image != null && !image.isEmpty()) {
-            imageURL = s3Service.uploadImage(image);
+            imageUrl = s3Service.uploadImage(image);
         }
-        Board board = new Board(boardWriteRequest.title(), boardWriteRequest.content(), imageURL, member);
+        Board board = new Board(boardWriteRequest.title(), boardWriteRequest.content(), imageUrl, member);
         boardRepository.save(board);
     }
 
