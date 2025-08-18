@@ -21,16 +21,16 @@ public class Board extends BaseEntity {
     private Long id;
     private String title;
     private String content;
-    private String imageUrl;
+    private String image;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Board(String title, String content, String imageUrl, Member member) {
+    public Board(String title, String content, String image, Member member) {
         this.title = title;
         this.content = content;
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.member = member;
     }
 
@@ -42,7 +42,7 @@ public class Board extends BaseEntity {
         this.content = content;
     }
 
-    public void changeImage(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void changeImage(String image) {
+        this.image = image;
     }
 }
