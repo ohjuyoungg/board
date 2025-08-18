@@ -12,10 +12,7 @@ import Board.Juyoung.repository.CommentRepository;
 import Board.Juyoung.repository.MemberRepository;
 import Board.Juyoung.service.dto.request.CommentUpdateRequest;
 import Board.Juyoung.service.dto.request.CommentWriteRequest;
-import Board.Juyoung.service.dto.response.CommentResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,9 +56,9 @@ public class CommentService {
         comment.changeContent(commentUpdateRequest.content());
     }
 
-    @Transactional(readOnly = true)
+  /* @Transactional(readOnly = true)
     public Page<CommentResponse> getComments(Long boardId, Pageable pageable) {
         Page<Comment> comments = commentRepository.findByBoardIdOrderByCreatedDateAsc(boardId, pageable);
         return comments.map(CommentResponse::of);
-    }
+    } */
 }
