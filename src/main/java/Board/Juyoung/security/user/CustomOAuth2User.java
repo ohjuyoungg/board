@@ -1,4 +1,4 @@
-package Board.Juyoung.service.dto;
+package Board.Juyoung.security.user;
 
 import Board.Juyoung.service.dto.response.UserLoginResponse;
 import java.util.ArrayList;

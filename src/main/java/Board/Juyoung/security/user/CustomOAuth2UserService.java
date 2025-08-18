@@ -1,8 +1,7 @@
-package Board.Juyoung.service;
+package Board.Juyoung.security.user;
 
 import Board.Juyoung.entity.Member;
 import Board.Juyoung.repository.MemberRepository;
-import Board.Juyoung.service.dto.CustomOAuth2User;
 import Board.Juyoung.service.dto.response.GoogleResponse;
 import Board.Juyoung.service.dto.response.KakaoResponse;
 import Board.Juyoung.service.dto.response.OAuth2Response;

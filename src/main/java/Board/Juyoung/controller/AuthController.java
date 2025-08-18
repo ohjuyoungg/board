@@ -1,6 +1,6 @@
 package Board.Juyoung.controller;
 
-import Board.Juyoung.jwt.JWTUtil;
+import Board.Juyoung.security.jwt.JWTUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;

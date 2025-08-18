@@ -1,6 +1,6 @@
-package Board.Juyoung.jwt;
+package Board.Juyoung.security.jwt;
 
-import Board.Juyoung.service.dto.CustomOAuth2User;
+import Board.Juyoung.security.user.CustomOAuth2User;
 import Board.Juyoung.service.dto.response.UserLoginResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

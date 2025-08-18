@@ -1,8 +1,8 @@
-package Board.Juyoung.config;
+package Board.Juyoung.security.config;
 
-import Board.Juyoung.jwt.JWTFilter;
-import Board.Juyoung.jwt.handler.CustomSuccessHandler;
-import Board.Juyoung.service.CustomOAuth2UserService;
+import Board.Juyoung.security.handler.CustomSuccessHandler;
+import Board.Juyoung.security.jwt.JWTFilter;
+import Board.Juyoung.security.user.CustomOAuth2UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

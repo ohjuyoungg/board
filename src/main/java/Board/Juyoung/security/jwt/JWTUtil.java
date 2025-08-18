@@ -1,4 +1,4 @@
-package Board.Juyoung.jwt;
+package Board.Juyoung.security.jwt;
 
 import io.jsonwebtoken.Jwts;
 import java.nio.charset.StandardCharsets;

@@ -1,7 +1,7 @@
-package Board.Juyoung.jwt.handler;
+package Board.Juyoung.security.handler;
 
-import Board.Juyoung.jwt.JWTUtil;
-import Board.Juyoung.service.dto.CustomOAuth2User;
+import Board.Juyoung.security.jwt.JWTUtil;
+import Board.Juyoung.security.user.CustomOAuth2User;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
